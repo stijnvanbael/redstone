@@ -524,7 +524,8 @@ class _ChainImpl implements Chain {
             currentContext.request.shelfRequest.requestedUri.path,
             err,
             stack,
-            statusCode);
+            statusCode,
+            currentContext.response.headers);
         currentContext.response = resp;
       }
     }

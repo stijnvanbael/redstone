@@ -1,17 +1,17 @@
 library redstone.src.response_writer;
 
 import 'dart:async';
-import 'dart:io';
 import 'dart:convert' as conv;
+import 'dart:io';
 
-import 'package:shelf/shelf.dart' as shelf;
 import 'package:di/di.dart';
 import 'package:mime/mime.dart';
+import 'package:shelf/shelf.dart' as shelf;
 import 'package:stack_trace/stack_trace.dart';
 
-import 'server_metadata.dart';
 import 'request.dart';
 import 'request_context.dart';
+import 'server_metadata.dart';
 
 Future<shelf.Response> writeResponse(String handlerName, dynamic response,
     {int statusCode: 200,
@@ -35,8 +35,9 @@ Future<shelf.Response> writeResponse(String handlerName, dynamic response,
 
   await Future.forEach(
       responseProcessors,
-      (p) async => response =
-          await p.processor(p.metadata, handlerName, response, injector));
+      (p) async =>
+  response =
+  await p.processor(p.metadata, handlerName, response, injector));
 
   if (response == null) {
     return new shelf.Response(statusCode);
@@ -52,7 +53,7 @@ Future<shelf.Response> writeResponse(String handlerName, dynamic response,
         encoding: conv.UTF8);
   } else if (response is File) {
     var type =
-        responseType != null ? responseType : lookupMimeType(response.path);
+    responseType != null ? responseType : lookupMimeType(response.path);
     return new shelf.Response(statusCode,
         body: response.openRead(), headers: {"content-type": type});
   } else {
@@ -63,7 +64,7 @@ Future<shelf.Response> writeResponse(String handlerName, dynamic response,
 }
 
 shelf.Response writeErrorPage(String resource, Object error,
-    [StackTrace stack, int statusCode]) {
+    [StackTrace stack, int statusCode, Map<String, String> headers]) {
   if (error is RequestException) {
     statusCode = error.statusCode;
   }
@@ -136,7 +137,8 @@ shelf.Response writeErrorPage(String resource, Object error,
 
   return new shelf.Response(statusCode,
       body: errorTemplate,
-      headers: {"content-type": "text/html"},
+      headers: {"content-type": "text/html"}
+        ..addAll(headers),
       encoding: conv.UTF8);
 }
 

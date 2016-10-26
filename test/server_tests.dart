@@ -205,7 +205,7 @@ void main() {
       var resp = await dispatch(req);
       expect(
           conv.JSON.decode(resp.mockContent),
-          
+
               {"arg1": "arg1", "arg2": "arg2", "arg3": null, "arg4": "arg4"});
     });
 
@@ -417,6 +417,20 @@ void main() {
       expect(resp.mockContent, "handling: error_response");
       expect(logRecords.isEmpty, true);
     });
+
+    test("Custom error header", () async {
+      var req = new MockRequest("/custom_error_header");
+      var resp = await dispatch(req);
+      expect(resp.statusCode, 400);
+      expect(resp.headers["custom_header"], ["custom_value"]);
+    });
+
+    test("Custom error body", () async {
+      var req = new MockRequest("/custom_error_body");
+      var resp = await dispatch(req);
+      expect(resp.statusCode, 400);
+      expect(resp.mockContent, "custom_body");
+    });
   });
 
   group("Chain:", () {
@@ -431,7 +445,7 @@ void main() {
       var resp = await dispatch(req);
       expect(
           resp.mockContent,
-          
+
               "before_interceptor1|before_interceptor2|target_executed|after_interceptor2|after_interceptor1");
       resp = await dispatch(req2);
       expect(resp.mockContent, "target_executed");
@@ -518,7 +532,7 @@ void main() {
       var resp = await dispatch(req);
       expect(
           resp.mockContent,
-          
+
               "root interceptor_1 interceptor_2 interceptor_3 interceptor_4 target ");
     });
 

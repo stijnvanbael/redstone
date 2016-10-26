@@ -54,6 +54,12 @@ shelf.Response subErrorHandler() => new shelf.Response.internalServerError(
 @Route("/error_response")
 ErrorResponse errorResponse() => throw new ErrorResponse(400, "error_response");
 
+@Route("/custom_error_header")
+shelf.Response customErrorHeader() => new shelf.Response(400, headers: {"custom_header": "custom_value"});
+
+@Route("/custom_error_body")
+shelf.Response customErrorBody() => new shelf.Response(400, body: "custom_body");
+
 @ErrorHandler(400, urlPattern: "/error_response")
 Future<shelf.Response> handleErrorResponse() async {
   String resp = await response.readAsString();
