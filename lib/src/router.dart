@@ -103,7 +103,7 @@ class Router {
         if (e is shelf.HijackException) {
           return;
         }
-        redstoneLogger.severe("Failed to handle request for ${req.url}");
+        redstoneLogger.severe("Failed to handle request for ${req.url}", e, chain);
       });
 
       return completer.future.then((shelf.Response response) {

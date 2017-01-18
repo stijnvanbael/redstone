@@ -12,15 +12,15 @@ import 'package:redstone/redstone.dart';
 import 'package:shelf/shelf.dart' as shelf;
 
 // These appear to be unused but are dynamically loaded and must be present.
-import 'services/routes.dart' as yo;
-import 'services/type_serialization.dart';
-import 'services/arguments.dart';
-import 'services/errors.dart';
-import 'services/interceptors.dart';
+import 'services/routes.dart' as yo; // ignore: unused_import
+import 'services/type_serialization.dart'; // ignore: unused_import
+import 'services/arguments.dart'; // ignore: unused_import
+import 'services/errors.dart'; // ignore: unused_import
+import 'services/interceptors.dart'; // ignore: unused_import
 import 'services/dependency_injection.dart';
-import 'services/install_lib.dart';
+import 'services/install_lib.dart'; // ignore: unused_import
 import 'services/plugins.dart';
-import 'services/inspect.dart';
+import 'services/inspect.dart'; // ignore: unused_import
 
 void main() {
   showErrorPage = false;
