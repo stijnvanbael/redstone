@@ -108,8 +108,9 @@ Future<HttpServer> start(
     bool autoCompress: false,
     bool shared: false,
     bool logSetUp: true,
-    Map<Symbol, dynamic> secureOptions}) async {
-  await redstoneSetUp();
+    Map<Symbol, dynamic> secureOptions,
+    List<Symbol> libraries}) async {
+  await redstoneSetUp(libraries);
 
   HttpServer server;
   if (secureOptions == null) {
